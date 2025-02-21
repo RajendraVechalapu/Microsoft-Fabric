@@ -1,0 +1,96 @@
+{
+    "name": "@ParentPipelineName",
+    "properties": {
+      "activities": [
+        {
+                "name": "Execute Copy Tables from source_sqldatabase_PL",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "varInitializeBatchID",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Copy Tables from source_sqldatabase_PL",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "BatchID": {
+                            "value": "@variables('BatchID')",
+                            "type": "Expression"
+                        }
+                    }
+                }
+},
+
+        {
+          "name": "getMaxBatchID",
+          "type": "Lookup",
+          "dependsOn": [],
+          "policy": {
+            "timeout": "0.12:00:00",
+            "retry": 0,
+            "retryIntervalInSeconds": 30,
+            "secureOutput": false,
+            "secureInput": false
+          },
+          "userProperties": [],
+          "typeProperties": {
+            "source": {
+              "type": "SqlServerSource",
+              "sqlReaderQuery": "SELECT cast(ISNULL(MAX(BatchID),1) as int) BatchID FROM ETL.BatchLog",
+              "queryTimeout": "02:00:00",
+              "partitionOption": "None"
+            },
+            "dataset": {
+              "referenceName": "dsetlframework",
+              "type": "DatasetReference"
+            }
+          }
+        },
+        {
+          "name": "varInitializeBatchID",
+          "type": "SetVariable",
+          "dependsOn": [
+            {
+              "activity": "getMaxBatchID",
+              "dependencyConditions": [
+                "Succeeded"
+              ]
+            }
+          ],
+          "policy": {
+            "secureOutput": false,
+            "secureInput": false
+          },
+          "userProperties": [],
+          "typeProperties": {
+            "variableName": "BatchID",
+            "value": {
+              "value": "@activity('getMaxBatchID').output.firstRow.BatchID\n",
+              "type": "Expression"
+            }
+          }
+        }
+
+      ],
+        "variables": {
+            "BatchID": {
+                "type": "Integer",
+                "defaultValue": 1
+            },
+            "InfoMessage": {
+                "type": "String"
+            }
+        },
+        "annotations": [],
+        "lastPublishTime": "2023-08-19T21:26:00Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

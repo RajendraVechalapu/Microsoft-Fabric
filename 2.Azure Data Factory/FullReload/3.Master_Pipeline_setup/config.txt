@@ -1,0 +1,4 @@
+SubscriptionId=59a5bd66-3a05-454b-8c17-6accff3c62bc
+ResourceGroupName=raj-resourcegroup-2023
+DataFactoryName=raj-adf-2024
+

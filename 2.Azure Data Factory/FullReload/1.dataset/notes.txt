@@ -1,0 +1,27 @@
+1. Create one DataSet for Framework
+2. Create dataset for each Source database
+3. Create dataset for Target databse
+
+1.Open the PowerShell and run it with Administrator Account
+
+2. Set Bat files AND JSON Files location from PS terminal
+	Ex: Set-Location 'D:\Rajendra-Tech\Azure Scripts\ARMTemplate\Deploy'
+	
+2. Ensure, run the below command to enable Connection to Azure Account from PowerShell
+
+	Connect-AzAccount
+
+
+#Use the script below to check if a particular submodule e.g. Az.Synapse is installed:
+
+if (Get-Module -ListAvailable -Name Az.Synapse) {
+Write-Host "Module exists"
+}
+else {
+Write-Host "Module does not exist"
+}
+#If the above code returns “Module does not exist”, Run the command below to install it:
+
+#Install-Module -Name Az.Synapse -Scope AllUsers -Repository PSGallery -Force
+
+3. Run DataSet and Pipelines Batch Files

@@ -1,0 +1,501 @@
+{
+  "name": "Copy Tables from source_sqldatabase_PL",
+  "properties": {
+    "activities": [
+      {
+        "name": "GetListOfSourceTables",
+        "type": "Lookup",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "userProperties": [],
+        "typeProperties": {
+          "source": {
+            "type": "AzureSqlSource",
+            "sqlReaderQuery": {
+              "value": "SELECT \n      [SourceTable]\n      ,[SourceTableColumnNames]\n      ,LandingTargetTableSchema\n      ,[LandingTargetTable]\n      ,[TargetTable]\n      ,[TargetProcName]\n      ,[HighWaterMarkColumn]\n      ,[HighWaterMarkColumnConvert]\n      ,[HighWaterMarkColumnQuery]\n      ,[DataLoadType]\n      \n  FROM [ETL].[DataLoadMapping]  \n  WHERE isnull([IsObjectScriptDeployedAtTargetDB],0)=1 and SourceServer='@{pipeline().parameters.SourceServer}'\n  and SourceDatabase='@{pipeline().parameters.SourceDatabase}'\n  and (\n     SourceTable='@{pipeline().parameters.TableName}'\n    or ''='@{pipeline().parameters.TableName}'\n  )",
+              "type": "Expression"
+            },
+            "queryTimeout": "02:00:00",
+            "partitionOption": "None"
+          },
+          "dataset": {
+            "referenceName": "dsetlframework",
+            "type": "DatasetReference"
+          },
+          "firstRowOnly": false
+        }
+      },
+      {
+        "name": "ForEach Table",
+        "type": "ForEach",
+        "dependsOn": [
+          {
+            "activity": "GetListOfSourceTables",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "userProperties": [],
+        "typeProperties": {
+          "items": {
+            "value": "@activity('GetListOfSourceTables').output.value",
+            "type": "Expression"
+          },
+          "isSequential": false,
+          "activities": [
+            {
+              "name": "Copy Data To Landing Table",
+              "type": "Copy",
+              "dependsOn": [
+                {
+                  "activity": "WaterMarkColumnMaxValue",
+                  "dependencyConditions": [
+                    "Succeeded"
+                  ]
+                }
+              ],
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureOutput": false,
+                "secureInput": false
+              },
+              "userProperties": [],
+              "typeProperties": {
+                "source": {
+                  "type": "SqlServerSource",
+                  "sqlReaderQuery": {
+                    "value": "SELECT \n    @{item().SourceTableColumnNames}, \n    CAST(SYSDATETIMEOFFSET() AT TIME ZONE 'New Zealand Standard Time' AS datetime)  as [CreatedAsAt(ETL)], \n    @{pipeline().parameters.BatchID} AS BatchID\n FROM\n    @{item().SourceTable}\nWHERE\n    @{item().HighWaterMarkColumnConvert} > \n    @{activity('WaterMarkColumnMaxValue').output.firstRow.MaxValue}",
+                    "type": "Expression"
+                  },
+                  "queryTimeout": "02:00:00",
+                  "partitionOption": "None"
+                },
+                "sink": {
+                  "type": "AzureSqlSink",
+                  "preCopyScript": {
+                    "value": "truncate table\n\n@{item().LandingTargetTableSchema}. \n@{item().LandingTargetTable} \n\n",
+                    "type": "Expression"
+                  },
+                  "writeBehavior": "insert",
+                  "sqlWriterUseTableLock": false,
+                  "disableMetricsCollection": false
+                },
+                "enableStaging": false,
+                "translator": {
+                  "type": "TabularTranslator",
+                  "typeConversion": true,
+                  "typeConversionSettings": {
+                    "allowDataTruncation": true,
+                    "treatBooleanAsNumber": false
+                  }
+                }
+              },
+              "inputs": [
+                {
+                  "referenceName": "dssourcesqldatabase",
+                  "type": "DatasetReference"
+                }
+              ],
+              "outputs": [
+                {
+                  "referenceName": "dstargetsqldatabase",
+                  "type": "DatasetReference",
+                  "parameters": {
+                    "SchemaName": {
+                      "value": "@item().LandingTargetTableSchema",
+                      "type": "Expression"
+                    },
+                    "TableName": {
+                      "value": "@item().LandingTargetTable",
+                      "type": "Expression"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "name": "TableDataLoadLog_Complete",
+              "type": "SqlServerStoredProcedure",
+              "dependsOn": [
+                {
+                  "activity": "dboMergeProc",
+                  "dependencyConditions": [
+                    "Succeeded"
+                  ]
+                }
+              ],
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureOutput": false,
+                "secureInput": false
+              },
+              "userProperties": [],
+              "typeProperties": {
+                "storedProcedureName": "[ETL].[usp_MetadataObjectsLog]",
+                "storedProcedureParameters": {
+                  "BatchID": {
+                    "value": {
+                      "value": "@pipeline().parameters.BatchID",
+                      "type": "Expression"
+                    },
+                    "type": "Int32"
+                  },
+                  "ObjectName": {
+                    "value": {
+                      "value": "@item().SourceTable",
+                      "type": "Expression"
+                    },
+                    "type": "String"
+                  },
+                  "ObjectType": {
+                    "value": "Table",
+                    "type": "String"
+                  },
+                  "RowsDeleted": {
+                    "value": {
+                      "value": "@string(activity('dboMergeProc').output.firstrow.RowsDeleted)",
+                      "type": "Expression"
+                    },
+                    "type": "Int32"
+                  },
+                  "RowsInserted": {
+                    "value": {
+                      "value": "@string(activity('dboMergeProc').output.firstrow.RowsInserted)",
+                      "type": "Expression"
+                    },
+                    "type": "Int32"
+                  },
+                  "rowsUpdated": {
+                    "value": {
+                      "value": "@string(activity('dboMergeProc').output.firstrow.RowsUpdated)",
+                      "type": "Expression"
+                    },
+                    "type": "Int32"
+                  },
+                  "Pipeline": {
+                    "value": {
+                      "value": "@pipeline().Pipeline",
+                      "type": "Expression"
+                    },
+                    "type": "String"
+                  }
+                }
+              },
+              "linkedServiceName": {
+                "referenceName": "lsframeworkLinkedServer",
+                "type": "LinkedServiceReference"
+              }
+            },
+            {
+              "name": "TableDataLoadLog_Start",
+              "type": "SqlServerStoredProcedure",
+              "dependsOn": [],
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureOutput": false,
+                "secureInput": false
+              },
+              "userProperties": [],
+              "typeProperties": {
+                "storedProcedureName": "[ETL].[usp_MetadataObjectsLog]",
+                "storedProcedureParameters": {
+                  "BatchID": {
+                    "value": {
+                      "value": "@pipeline().parameters.BatchID",
+                      "type": "Expression"
+                    },
+                    "type": "Int32"
+                  },
+                  "ObjectName": {
+                    "value": {
+                      "value": "@item().SourceTable",
+                      "type": "Expression"
+                    },
+                    "type": "String"
+                  },
+                  "ObjectType": {
+                    "value": "Table",
+                    "type": "String"
+                  },
+                  "RowsDeleted": {
+                    "value": "0",
+                    "type": "Int32"
+                  },
+                  "RowsInserted": {
+                    "value": "0",
+                    "type": "Int32"
+                  },
+                  "rowsUpdated": {
+                    "value": "0",
+                    "type": "Int32"
+                  },
+                  "Pipeline": {
+                    "value": {
+                      "value": "@pipeline().Pipeline",
+                      "type": "Expression"
+                    },
+                    "type": "String"
+                  }
+                }
+              },
+              "linkedServiceName": {
+                "referenceName": "lsframeworkLinkedServer",
+                "type": "LinkedServiceReference"
+              }
+            },
+            {
+              "name": "dboMergeProc",
+              "type": "Lookup",
+              "dependsOn": [
+                {
+                  "activity": "Copy Data To Landing Table",
+                  "dependencyConditions": [
+                    "Succeeded"
+                  ]
+                }
+              ],
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureOutput": false,
+                "secureInput": false
+              },
+              "userProperties": [],
+              "typeProperties": {
+                "source": {
+                  "type": "AzureSqlSource",
+                  "sqlReaderStoredProcedureName": {
+                    "value": "@item().TargetProcName",
+                    "type": "Expression"
+                  },
+                  "storedProcedureParameters": {
+                    "RowsDeleted": {
+                      "type": "Int32",
+                      "value": "0"
+                    },
+                    "RowsInserted": {
+                      "type": "Int32",
+                      "value": "0"
+                    },
+                    "RowsUpdated": {
+                      "type": "Int32",
+                      "value": "0"
+                    },
+                    "BatchID": {
+                      "type": "Int32",
+                      "value": {
+                        "value": "@pipeline().parameters.BatchID",
+                        "type": "Expression"
+                      }
+                    }
+                  },
+                  "queryTimeout": "02:00:00",
+                  "partitionOption": "None"
+                },
+                "dataset": {
+                  "referenceName": "dstargetsqldatabase",
+                  "type": "DatasetReference",
+                  "parameters": {
+                    "SchemaName": "NULL",
+                    "TableName": "NULL"
+                  }
+                }
+              }
+            },
+            {
+              "name": "ErrorLog",
+              "type": "SqlServerStoredProcedure",
+              "dependsOn": [
+                {
+                  "activity": "Copy Data To Landing Table",
+                  "dependencyConditions": [
+                    "Failed"
+                  ]
+                }
+              ],
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureOutput": false,
+                "secureInput": false
+              },
+              "userProperties": [],
+              "typeProperties": {
+                "storedProcedureName": "[ETL].[usp_ErrorLog]",
+                "storedProcedureParameters": {
+                  "BatchID": {
+                    "value": {
+                      "value": "@pipeline().parameters.BatchID",
+                      "type": "Expression"
+                    },
+                    "type": "Int32"
+                  },
+                  "Error": {
+                    "value": {
+                      "value": "@activity('Copy Data To Landing Table').Error.Message",
+                      "type": "Expression"
+                    },
+                    "type": "String"
+                  },
+                  "Pipeline": {
+                    "value": {
+                      "value": "@pipeline().Pipeline",
+                      "type": "Expression"
+                    },
+                    "type": "String"
+                  },
+                  "TableName": {
+                    "value": {
+                      "value": "@item().SourceTable",
+                      "type": "Expression"
+                    },
+                    "type": "String"
+                  }
+                }
+              },
+              "linkedServiceName": {
+                "referenceName": "lsframeworkLinkedServer",
+                "type": "LinkedServiceReference"
+              }
+            },
+            {
+              "name": "ErrorLogMergeProc",
+              "type": "SqlServerStoredProcedure",
+              "dependsOn": [
+                {
+                  "activity": "dboMergeProc",
+                  "dependencyConditions": [
+                    "Failed"
+                  ]
+                }
+              ],
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureOutput": false,
+                "secureInput": false
+              },
+              "userProperties": [],
+              "typeProperties": {
+                "storedProcedureName": "[ETL].[usp_ErrorLog]",
+                "storedProcedureParameters": {
+                  "BatchID": {
+                    "value": {
+                      "value": "@pipeline().parameters.BatchID",
+                      "type": "Expression"
+                    },
+                    "type": "Int32"
+                  },
+                  "Error": {
+                    "value": {
+                      "value": "@activity('dboMergeProc').Error.Message",
+                      "type": "Expression"
+                    },
+                    "type": "String"
+                  },
+                  "TableName": {
+                    "value": {
+                      "value": "@item().SourceTable",
+                      "type": "Expression"
+                    },
+                    "type": "String"
+                  },
+                  "Pipeline": {
+                    "value": {
+                      "value": "@pipeline().Pipeline",
+                      "type": "Expression"
+                    },
+                    "type": "String"
+                  }
+                }
+              },
+              "linkedServiceName": {
+                "referenceName": "lsframeworkLinkedServer",
+                "type": "LinkedServiceReference"
+              }
+            },
+            {
+              "name": "WaterMarkColumnMaxValue",
+              "type": "Lookup",
+              "dependsOn": [
+                {
+                  "activity": "TableDataLoadLog_Start",
+                  "dependencyConditions": [
+                    "Succeeded"
+                  ]
+                }
+              ],
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureOutput": false,
+                "secureInput": false
+              },
+              "userProperties": [],
+              "typeProperties": {
+                "source": {
+                  "type": "AzureSqlSource",
+                  "sqlReaderQuery": {
+                    "value": "@{item().HighWaterMarkColumnQuery} ",
+                    "type": "Expression"
+                  },
+                  "queryTimeout": "02:00:00",
+                  "partitionOption": "None"
+                },
+                "dataset": {
+                  "referenceName": "dstargetsqldatabase",
+                  "type": "DatasetReference",
+                  "parameters": {
+                    "SchemaName": "\"\"",
+                    "TableName": "\"\""
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parameters": {
+      "SourceServer": {
+        "type": "string",
+        "defaultValue": "RAJENDRAV\\SQLSERVER2022"
+      },
+      "SourceDatabase": {
+        "type": "string",
+        "defaultValue": "source_sqldatabase"
+      },
+      "TableName": {
+        "type": "string"
+      },
+      "BatchID": {
+        "type": "int"
+      }
+    },
+    "variables": {
+      "InfoMessage": {
+        "type": "String"
+      }
+    },
+    "annotations": [],
+    "lastPublishTime": "2023-08-19T21:17:57Z"
+  },
+  "type": "Microsoft.DataFactory/factories/pipelines"
+}
