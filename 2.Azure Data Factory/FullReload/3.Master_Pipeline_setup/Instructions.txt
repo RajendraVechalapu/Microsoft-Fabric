@@ -1,0 +1,38 @@
+Select Tools > NuGet Package Manager > Package Manager Console.
+
+In the Package Manager Console pane, run the following commands to install packages. For more information, see the Microsoft.Azure.Management.DataFactory NuGet package.
+
+Install-Package Microsoft.Azure.Management.DataFactory
+Install-Package Microsoft.Azure.Management.ResourceManager -IncludePrerelease
+Install-Package Microsoft.Identity.Client
+
+#Uninstall-AzureRm , AS 'AZ' and 'AzureRm' can't be install on same Machine
+Install-Module -Name Az -AllowClobber -Scope CurrentUser
+Update-Module -Name Az
+
+(Visual Studio Code with powershell)
+Last Option - Manual upload of files to ADF
+
+1. Ensure, run the below command to enable Connection to Azure Account from PowerShell
+
+	Connect-AzAccount
+
+2.Open the PowerShell and run it with Administrator Account
+3.Copy the bat files to the location where JSON foles located and to be published to Azure
+	Set-Location 'D:\Rajendra-Tech\Azure Scripts\ARMTemplate\Deploy'
+
+#Use the script below to check if a particular submodule e.g. Az.Synapse is installed:
+
+if (Get-Module -ListAvailable -Name Az.Synapse) {
+Write-Host "Module exists"
+}
+else {
+Write-Host "Module does not exist"
+}
+#If the above code returns “Module does not exist”, Run the command below to install it:
+
+#Install-Module -Name Az.Synapse -Scope AllUsers -Repository PSGallery -Force
+
+1.Run the Batch Files from Project folder Deploy-DataSets
+2. Run the Batch Files from Project folder Deploy-Pipelines
+

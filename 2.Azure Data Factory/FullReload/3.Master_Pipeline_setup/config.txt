@@ -1,0 +1,4 @@
+SubscriptionId=REMOVED_UUID
+ResourceGroupName=raj-resourcegroup-2023
+DataFactoryName=raj-adf-2024
+

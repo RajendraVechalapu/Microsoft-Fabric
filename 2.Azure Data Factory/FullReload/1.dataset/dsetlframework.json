@@ -1,0 +1,13 @@
+{
+    "name": "dsetlframework",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "lsframeworkLinkedServer",
+            "type": "LinkedServiceReference"
+        },
+        "annotations": [],
+        "type": "SqlServerTable",
+        "schema": []
+    },
+    "type": "Microsoft.DataFactory/factories/datasets"
+}

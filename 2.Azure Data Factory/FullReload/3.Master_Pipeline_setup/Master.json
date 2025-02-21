@@ -1,0 +1,183 @@
+{
+    "name": "Master",
+    "properties": {
+        "activities": [
+            {
+                "name": "Execute InvokePL_SourcesLoading",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "varInitializeBatchID",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "InvokePL_SourcesLoading",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "BatchID": {
+                            "value": "@variables('BatchID')",
+                            "type": "Expression"
+                        }
+                    }
+                }
+},
+
+            {
+                "name": "ETL_BeginBatch",
+                "type": "SqlServerStoredProcedure",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "storedProcedureName": "[ETL].[usp_BeginBatch]",
+                    "storedProcedureParameters": {
+                        "Pipeline": {
+                            "value": {
+                                "value": "@pipeline().Pipeline",
+                                "type": "Expression"
+                            },
+                            "type": "String"
+                        }
+                    }
+                },
+                "linkedServiceName": {
+                    "referenceName": "lsframeworkLinkedServer",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "getMaxBatchID",
+                "type": "Lookup",
+                "dependsOn": [
+                    {
+                        "activity": "ETL_BeginBatch",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "SqlServerSource",
+                        "sqlReaderQuery": "SELECT cast(ISNULL(MAX(BatchID),1) as int) BatchID FROM ETL.BatchLog",
+                        "queryTimeout": "02:00:00",
+                        "partitionOption": "None"
+                    },
+                    "dataset": {
+                        "referenceName": "dsetlframework",
+                        "type": "DatasetReference"
+                    }
+                }
+            },
+            {
+                "name": "varInitializeBatchID",
+                "type": "SetVariable",
+                "dependsOn": [
+                    {
+                        "activity": "getMaxBatchID",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "variableName": "BatchID",
+                    "value": {
+                        "value": "@activity('getMaxBatchID').output.firstRow.BatchID\n",
+                        "type": "Expression"
+                    }
+                }
+            },
+            {
+                "name": "ETL_EndBatch",
+                "type": "SqlServerStoredProcedure",
+              "dependsOn": [
+                {
+  "activity": "Execute InvokePL_SourcesLoading",
+  "dependencyConditions": [
+    "Succeeded"
+  ]
+}
+
+              ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "storedProcedureName": "[ETL].[usp_EndBatch]",
+                    "storedProcedureParameters": {
+                        "BatchID": {
+                            "value": {
+                                "value": "@variables('BatchID')",
+                                "type": "Expression"
+                            },
+                            "type": "Int32"
+                        },
+                        "Error": {
+                            "value": "",
+                            "type": "String"
+                        },
+                        "PipeLine": {
+                            "value": {
+                                "value": "@pipeline().Pipeline",
+                                "type": "Expression"
+                            },
+                            "type": "String"
+                        },
+                        "Status": {
+                            "value": "Completed",
+                            "type": "String"
+                        }
+                    }
+                },
+                "linkedServiceName": {
+                    "referenceName": "lsframeworkLinkedServer",
+                    "type": "LinkedServiceReference"
+                }
+            }
+        ],
+        "variables": {
+            "BatchID": {
+                "type": "Integer",
+                "defaultValue": 1
+            },
+            "InfoMessage": {
+                "type": "String"
+            }
+        },
+        "annotations": [],
+        "lastPublishTime": "2023-08-19T21:26:00Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}
