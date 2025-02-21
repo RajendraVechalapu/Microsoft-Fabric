@@ -1,0 +1,3 @@
+- Created for full reload. ex OnPrem SQL Database to Target Azure SQL Database
+- Scripts are usually created in the target database, such as Azure SQL Database.
+- These scripts are examples to generate target tables and load source table data into the target for a full load scheme.
