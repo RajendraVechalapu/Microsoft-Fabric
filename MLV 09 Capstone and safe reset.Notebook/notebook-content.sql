@@ -72,4 +72,3 @@ SELECT SUM(line_total) AS starting_revenue FROM mlv_learn.silver_sales;
 -- META   "language": "sparksql",
 -- META   "language_group": "synapse_pyspark"
 -- META }
-

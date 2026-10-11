@@ -107,4 +107,3 @@ SELECT * FROM mlv_learn.orphan_orders;
 -- META   "language": "sparksql",
 -- META   "language_group": "synapse_pyspark"
 -- META }
-

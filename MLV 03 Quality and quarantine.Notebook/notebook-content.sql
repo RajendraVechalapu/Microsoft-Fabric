@@ -86,4 +86,3 @@ SELECT * FROM mlv_learn.rejected_orders ORDER BY order_id;
 -- META   "language": "sparksql",
 -- META   "language_group": "synapse_pyspark"
 -- META }
-

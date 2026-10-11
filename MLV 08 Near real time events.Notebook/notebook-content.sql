@@ -159,4 +159,3 @@ SELECT * FROM mlv_learn.device_minute;
 -- META   "language": "sparksql",
 -- META   "language_group": "synapse_pyspark"
 -- META }
-

@@ -85,4 +85,3 @@ SELECT * FROM mlv_learn.customer_rank ORDER BY revenue_rank, customer_id;
 -- META   "language": "sparksql",
 -- META   "language_group": "synapse_pyspark"
 -- META }
-

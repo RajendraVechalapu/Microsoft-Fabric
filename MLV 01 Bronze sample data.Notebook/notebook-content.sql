@@ -114,4 +114,3 @@ SELECT * FROM mlv_learn.orders ORDER BY order_id;
 -- META   "language": "sparksql",
 -- META   "language_group": "synapse_pyspark"
 -- META }
-

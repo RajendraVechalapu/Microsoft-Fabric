@@ -121,4 +121,3 @@ SELECT COUNT(*) AS silver_count, SUM(line_total) AS revenue FROM mlv_learn.silve
 -- META   "language": "sparksql",
 -- META   "language_group": "synapse_pyspark"
 -- META }
-
