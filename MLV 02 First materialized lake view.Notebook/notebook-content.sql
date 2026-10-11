@@ -75,4 +75,3 @@ SHOW CREATE MATERIALIZED LAKE VIEW mlv_learn.completed_orders;
 -- META   "language": "sparksql",
 -- META   "language_group": "synapse_pyspark"
 -- META }
-

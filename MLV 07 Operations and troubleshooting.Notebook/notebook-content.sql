@@ -82,4 +82,3 @@ SHOW TBLPROPERTIES mlv_learn.orders;
 -- META   "language": "sparksql",
 -- META   "language_group": "synapse_pyspark"
 -- META }
-

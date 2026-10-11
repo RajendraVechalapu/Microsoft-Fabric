@@ -57,4 +57,3 @@ SHOW SCHEMAS;
 -- META   "language": "sparksql",
 -- META   "language_group": "synapse_pyspark"
 -- META }
-
