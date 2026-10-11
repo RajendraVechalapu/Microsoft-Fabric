@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "MLV 08 Near real time events",
+    "description": "Materialized lake views learning series: 08 Near real time events"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "3d7586df-54b8-4734-9416-dc48cc772175"
+  }
+}

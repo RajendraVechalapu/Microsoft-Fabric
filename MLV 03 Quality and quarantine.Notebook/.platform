@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "MLV 03 Quality and quarantine",
+    "description": "Materialized lake views learning series: 03 Quality and quarantine"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "723ca0fe-8280-4aea-9e97-2ad4ad1ac60a"
+  }
+}

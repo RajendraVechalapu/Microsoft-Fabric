@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "MLV 09 Capstone and safe reset",
+    "description": "Materialized lake views learning series: 09 Capstone and safe reset"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "05b613c6-981a-4600-99b2-cac27d576961"
+  }
+}

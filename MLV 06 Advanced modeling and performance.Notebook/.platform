@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "MLV 06 Advanced modeling and performance",
+    "description": "Materialized lake views learning series: 06 Advanced modeling and performance"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "a2418f57-cc37-4961-9a1b-313ba18ec877"
+  }
+}

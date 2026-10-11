@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "MLV 01 Bronze sample data",
+    "description": "Materialized lake views learning series: 01 Bronze sample data"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "890d2870-2675-44c8-b756-f0b41bd87a8a"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "MLV 04 Silver gold and lineage",
+    "description": "Materialized lake views learning series: 04 Silver gold and lineage"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "124165fc-ecfa-4fb6-ba65-94e853c064cd"
+  }
+}

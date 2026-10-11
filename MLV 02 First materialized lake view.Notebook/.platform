@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "MLV 02 First materialized lake view",
+    "description": "Materialized lake views learning series: 02 First materialized lake view"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "8d951f60-ea64-4b00-afc8-3591f74e0352"
+  }
+}
