@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "DELTA 04 Bronze silver and quality",
+    "description": "Fabric Delta Lake end-to-end lab: 04 Bronze silver and quality"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "2f1c5973-9e57-4517-b0c3-7ece6c980435"
+  }
+}

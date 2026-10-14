@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "DELTA 14 Capstone acceptance and safe reset",
+    "description": "Fabric Delta Lake end-to-end lab: 14 Capstone acceptance and safe reset"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "28c8dc76-202d-4737-943f-3d6dd3864073"
+  }
+}

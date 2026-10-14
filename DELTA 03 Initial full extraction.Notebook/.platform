@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "DELTA 03 Initial full extraction",
+    "description": "Fabric Delta Lake end-to-end lab: 03 Initial full extraction"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "92f6727c-2b40-4950-8845-faa9e5d6e9db"
+  }
+}

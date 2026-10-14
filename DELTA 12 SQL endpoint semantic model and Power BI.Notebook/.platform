@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "DELTA 12 SQL endpoint semantic model and Power BI",
+    "description": "Fabric Delta Lake end-to-end lab: 12 SQL endpoint semantic model and Power BI"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "6a38b071-c5a8-42d4-87aa-3f462b97215b"
+  }
+}

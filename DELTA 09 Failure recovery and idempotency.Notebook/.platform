@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "DELTA 09 Failure recovery and idempotency",
+    "description": "Fabric Delta Lake end-to-end lab: 09 Failure recovery and idempotency"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "fb869163-c916-4f74-83e7-eb132ffa6e66"
+  }
+}

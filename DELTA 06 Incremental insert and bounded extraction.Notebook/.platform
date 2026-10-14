@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "DELTA 06 Incremental insert and bounded extraction",
+    "description": "Fabric Delta Lake end-to-end lab: 06 Incremental insert and bounded extraction"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "19072a3c-0922-46f6-8af3-783b7e7ed1a5"
+  }
+}

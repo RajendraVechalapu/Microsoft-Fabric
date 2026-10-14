@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "DELTA 10 Pipeline batch runner",
+    "description": "Fabric Delta Lake end-to-end lab: 10 Pipeline batch runner"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "793ea72c-9a49-45d3-aa8e-36168fd34bb3"
+  }
+}

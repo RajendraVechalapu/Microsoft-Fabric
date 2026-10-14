@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "DELTA 02 Delta anatomy and time travel",
+    "description": "Fabric Delta Lake end-to-end lab: 02 Delta anatomy and time travel"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "51d1eecd-c71a-4298-b1dd-9dd25d75cf89"
+  }
+}

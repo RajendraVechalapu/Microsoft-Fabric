@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "DELTA 05 Gold star schema and reconciliation",
+    "description": "Fabric Delta Lake end-to-end lab: 05 Gold star schema and reconciliation"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "0edbe374-e4e8-4565-b604-e7f696bda7b9"
+  }
+}

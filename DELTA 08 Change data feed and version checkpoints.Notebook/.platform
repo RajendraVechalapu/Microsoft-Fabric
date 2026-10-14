@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "DELTA 08 Change data feed and version checkpoints",
+    "description": "Fabric Delta Lake end-to-end lab: 08 Change data feed and version checkpoints"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "29a31069-d0f5-4b06-be7c-7d3cad39a067"
+  }
+}

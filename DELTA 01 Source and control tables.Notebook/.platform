@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "DELTA 01 Source and control tables",
+    "description": "Fabric Delta Lake end-to-end lab: 01 Source and control tables"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "51940a79-f8ec-425f-be85-6d331882cf9d"
+  }
+}
