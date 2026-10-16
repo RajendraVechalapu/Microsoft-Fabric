@@ -121,6 +121,7 @@
 -- Run 01 through 09 in order, CELL BY CELL: several lessons pause for UI actions.
 -- Do not schedule these lesson notebooks: use lakehouse-managed MLV schedules.
 SELECT current_database() AS attached_database, current_timestamp() AS session_time;
+SELECT current_catalog();
 
 -- METADATA ********************
 
@@ -136,6 +137,62 @@ SELECT current_database() AS attached_database, current_timestamp() AS session_t
 SHOW SCHEMAS;
 -- EXERCISE: explain storage cost vs query cost vs freshness in your own words.
 -- Read the course README for setup, expected results, replay, and references.
+
+-- METADATA ********************
+
+-- META {
+-- META   "language": "sparksql",
+-- META   "language_group": "synapse_pyspark"
+-- META }
+
+-- CELL ********************
+
+-- Create a sample mlv learn schema and add a sample data and then write select to know data successfully loaaded into the schema.
+CREATE SCHEMA IF NOT EXISTS mlv_learn;
+
+
+-- METADATA ********************
+
+-- META {
+-- META   "language": "sparksql",
+-- META   "language_group": "synapse_pyspark"
+-- META }
+
+-- CELL ********************
+
+-- create a sample table and insert some data into it
+CREATE TABLE IF NOT EXISTS mlv_learn.sample_table (
+    id INT,
+    name STRING,
+    value DOUBLE
+);
+
+-- METADATA ********************
+
+-- META {
+-- META   "language": "sparksql",
+-- META   "language_group": "synapse_pyspark"
+-- META }
+
+-- CELL ********************
+
+-- add some sample data into the table
+INSERT INTO mlv_learn.sample_table (id, name, value) VALUES
+    (1, 'Alice', 10.5),
+    (2, 'Bob', 20.0),
+    (3, 'Charlie', 30.75);
+
+-- METADATA ********************
+
+-- META {
+-- META   "language": "sparksql",
+-- META   "language_group": "synapse_pyspark"
+-- META }
+
+-- CELL ********************
+
+-- display the data in the sample table to verify it was loaded successfully
+SELECT * FROM mlv_learn.sample_table;
 
 -- METADATA ********************
 

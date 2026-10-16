@@ -37,6 +37,18 @@ CREATE SCHEMA IF NOT EXISTS mlv_learn;
 
 -- CELL ********************
 
+SHOW SCHEMAS;
+
+-- METADATA ********************
+
+-- META {
+-- META   "language": "sparksql",
+-- META   "language_group": "synapse_pyspark"
+-- META }
+
+-- CELL ********************
+
+
 CREATE TABLE IF NOT EXISTS mlv_learn.customers (
   customer_id INT, customer_name STRING, city STRING
 ) USING DELTA TBLPROPERTIES ('delta.enableChangeDataFeed'='true');
@@ -51,6 +63,7 @@ CREATE TABLE IF NOT EXISTS mlv_learn.customers (
 -- CELL ********************
 
 CREATE TABLE IF NOT EXISTS mlv_learn.orders (
+  -- USING DELTA: store the
   order_id INT, customer_id INT, quantity INT, unit_price DECIMAL(12,2),
   status STRING, order_ts TIMESTAMP
 ) USING DELTA TBLPROPERTIES ('delta.enableChangeDataFeed'='true');
