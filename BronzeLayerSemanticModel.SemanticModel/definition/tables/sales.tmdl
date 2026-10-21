@@ -1,0 +1,53 @@
+table sales
+	lineageTag: f7382795-e085-439d-bed8-d6e6ea97bf06
+	sourceLineageTag: [dbo].[sales]
+
+	column order_id
+		dataType: int64
+		formatString: 0
+		lineageTag: df968662-3085-4c1e-a75c-2ac19b7f49b4
+		sourceLineageTag: order_id
+		summarizeBy: sum
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_id
+		dataType: int64
+		formatString: 0
+		lineageTag: c80632e9-aaa0-4147-bc6b-9b30e37ec9bb
+		sourceLineageTag: customer_id
+		summarizeBy: sum
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column amount
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: e24479f3-eba9-464d-876a-1111e05ef9e8
+		sourceLineageTag: amount
+		summarizeBy: sum
+		sourceColumn: amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column order_ts
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3cf14299-3370-44e5-af35-11d836b7c13d
+		sourceLineageTag: order_ts
+		summarizeBy: none
+		sourceColumn: order_ts
+
+		annotation SummarizationSetBy = Automatic
+
+	partition sales = entity
+		mode: directLake
+		source
+			entityName: sales
+			schemaName: dbo
+			expressionSource: 'DirectLake - LH_BRONZE_LAYER'
+

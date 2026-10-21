@@ -1,0 +1,89 @@
+table dbo_Product
+	lineageTag: c2d5305a-497d-45c6-bcc0-7123cbe4841e
+	sourceLineageTag: [dbo].[dbo_Product]
+
+	column ProductID
+		dataType: int64
+		formatString: 0
+		lineageTag: 0a7ffcab-6919-4bc5-acbe-241c829bd3cb
+		sourceLineageTag: ProductID
+		summarizeBy: count
+		sourceColumn: ProductID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductName
+		dataType: string
+		lineageTag: 22de78dd-5ad1-487b-a8b9-9b29a843ccb7
+		sourceLineageTag: ProductName
+		summarizeBy: none
+		sourceColumn: ProductName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: f718179e-548f-4d3a-86a7-9588b78b7dcb
+		sourceLineageTag: Category
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column UnitPrice
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: f21fd48a-6764-4328-ba56-f0778fe049a0
+		sourceLineageTag: UnitPrice
+		summarizeBy: sum
+		sourceColumn: UnitPrice
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column ModifiedDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a4c66621-6bde-44b1-bbb9-c128e7f16e07
+		sourceLineageTag: ModifiedDate
+		summarizeBy: none
+		sourceColumn: ModifiedDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column HashedPKColumn
+		dataType: string
+		lineageTag: a1813026-63c0-4b9d-862c-a11c886eb799
+		sourceLineageTag: HashedPKColumn
+		summarizeBy: none
+		sourceColumn: HashedPKColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column HashedNonKeyColumns
+		dataType: string
+		lineageTag: b5ff971e-34f8-43d5-bf01-aa71c55f046a
+		sourceLineageTag: HashedNonKeyColumns
+		summarizeBy: none
+		sourceColumn: HashedNonKeyColumns
+
+		annotation SummarizationSetBy = Automatic
+
+	column RecordLoadDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 66d060b0-69be-47a0-86bc-0fb79a7d6578
+		sourceLineageTag: RecordLoadDate
+		summarizeBy: none
+		sourceColumn: RecordLoadDate
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dbo_Product = entity
+		mode: directLake
+		source
+			entityName: dbo_Product
+			schemaName: dbo
+			expressionSource: 'DirectLake - LH_BRONZE_LAYER'
+

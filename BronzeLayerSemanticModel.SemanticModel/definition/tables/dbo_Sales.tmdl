@@ -1,0 +1,133 @@
+table dbo_Sales
+	lineageTag: 89461651-22eb-49d3-b15b-5d7f70db05f6
+	sourceLineageTag: [dbo].[dbo_Sales]
+
+	column SalesID
+		dataType: int64
+		formatString: 0
+		lineageTag: b3ef54e1-1d2e-4e72-b2c7-2536e404d224
+		sourceLineageTag: SalesID
+		summarizeBy: count
+		sourceColumn: SalesID
+
+		annotation SummarizationSetBy = Automatic
+
+	column SalesDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2608bb2a-a729-44fd-a1c0-580e1da7bdd3
+		sourceLineageTag: SalesDate
+		summarizeBy: none
+		sourceColumn: SalesDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerID
+		dataType: int64
+		formatString: 0
+		lineageTag: d35fa6c4-a38f-4cd3-b8c1-b78ce6dbd839
+		sourceLineageTag: CustomerID
+		summarizeBy: count
+		sourceColumn: CustomerID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductID
+		dataType: int64
+		formatString: 0
+		lineageTag: 3dab5436-714c-4f23-a2b8-4f5abcd7c18e
+		sourceLineageTag: ProductID
+		summarizeBy: count
+		sourceColumn: ProductID
+
+		annotation SummarizationSetBy = Automatic
+
+	column StoreID
+		dataType: int64
+		formatString: 0
+		lineageTag: 9339bba2-7290-4a66-a785-df97a0612b92
+		sourceLineageTag: StoreID
+		summarizeBy: count
+		sourceColumn: StoreID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 4dfa3fb4-17d4-4528-9d53-840a1b1864ad
+		sourceLineageTag: Quantity
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column UnitPrice
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: a8f9df9a-581f-4da2-b0e8-b88b751de156
+		sourceLineageTag: UnitPrice
+		summarizeBy: sum
+		sourceColumn: UnitPrice
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column SalesAmount
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: ee832e76-94fe-48fe-9881-0fcc242edb68
+		sourceLineageTag: SalesAmount
+		summarizeBy: sum
+		sourceColumn: SalesAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column ModifiedDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 604f0fa8-d5c9-4fe5-9ed5-4a6aa1450c9a
+		sourceLineageTag: ModifiedDate
+		summarizeBy: none
+		sourceColumn: ModifiedDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column HashedPKColumn
+		dataType: string
+		lineageTag: 7d3f4e16-a616-4a63-bc95-b9c8d3ba4320
+		sourceLineageTag: HashedPKColumn
+		summarizeBy: none
+		sourceColumn: HashedPKColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column HashedNonKeyColumns
+		dataType: string
+		lineageTag: bc3046aa-3638-4ced-bceb-4d29bf675847
+		sourceLineageTag: HashedNonKeyColumns
+		summarizeBy: none
+		sourceColumn: HashedNonKeyColumns
+
+		annotation SummarizationSetBy = Automatic
+
+	column RecordLoadDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 13d64b30-dd8b-42ef-9af0-f89f35fc5844
+		sourceLineageTag: RecordLoadDate
+		summarizeBy: none
+		sourceColumn: RecordLoadDate
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dbo_Sales = entity
+		mode: directLake
+		source
+			entityName: dbo_Sales
+			schemaName: dbo
+			expressionSource: 'DirectLake - LH_BRONZE_LAYER'
+

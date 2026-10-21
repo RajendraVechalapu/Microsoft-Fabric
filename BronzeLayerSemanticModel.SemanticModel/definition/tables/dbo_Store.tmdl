@@ -1,0 +1,77 @@
+table dbo_Store
+	lineageTag: 5bffe28c-aa9e-44c4-ae33-60a6721848e1
+	sourceLineageTag: [dbo].[dbo_Store]
+
+	column StoreID
+		dataType: int64
+		formatString: 0
+		lineageTag: 0dc322b0-b3c1-4bb4-8eef-8701fca9d918
+		sourceLineageTag: StoreID
+		summarizeBy: count
+		sourceColumn: StoreID
+
+		annotation SummarizationSetBy = Automatic
+
+	column StoreName
+		dataType: string
+		lineageTag: d111a9e3-7c36-48b9-9848-6d9d064e8881
+		sourceLineageTag: StoreName
+		summarizeBy: none
+		sourceColumn: StoreName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: 8c4a15ed-70ae-4231-82b8-01c8853262fe
+		sourceLineageTag: Region
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column ModifiedDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 65db181e-80b7-484c-a341-a161421528aa
+		sourceLineageTag: ModifiedDate
+		summarizeBy: none
+		sourceColumn: ModifiedDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column HashedPKColumn
+		dataType: string
+		lineageTag: 5b174031-20f3-41fb-a1cb-ba69934f0fba
+		sourceLineageTag: HashedPKColumn
+		summarizeBy: none
+		sourceColumn: HashedPKColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column HashedNonKeyColumns
+		dataType: string
+		lineageTag: 3fd24a7a-3c11-4a43-a373-8dd94b51d531
+		sourceLineageTag: HashedNonKeyColumns
+		summarizeBy: none
+		sourceColumn: HashedNonKeyColumns
+
+		annotation SummarizationSetBy = Automatic
+
+	column RecordLoadDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 36fd5047-5878-45af-85b7-ac515f9fc11a
+		sourceLineageTag: RecordLoadDate
+		summarizeBy: none
+		sourceColumn: RecordLoadDate
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dbo_Store = entity
+		mode: directLake
+		source
+			entityName: dbo_Store
+			schemaName: dbo
+			expressionSource: 'DirectLake - LH_BRONZE_LAYER'
+

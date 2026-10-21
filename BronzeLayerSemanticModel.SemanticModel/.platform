@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "BronzeLayerSemanticModel"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "dd1e9bf7-ae4e-9d7d-4037-3423d7e09bb0"
+  }
+}

@@ -1,0 +1,11 @@
+expression 'DirectLake - LH_BRONZE_LAYER' =
+		let
+		    Source = AzureStorage.DataLake("https://onelake.dfs.fabric.microsoft.com/5eb70860-7a4a-4770-86da-351148a2dddc/575635c0-39a7-4c4a-b3b2-51947e31e4f6", [HierarchicalNavigation=true])
+		in
+		    Source
+	lineageTag: ef6804a9-33d0-444f-982d-59db235ba94a
+
+	annotation PBI_IncludeFutureArtifacts = False
+
+	annotation PBI_RemovedChildren = [{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[mlv_demo].[gold_daily_sales_by_city]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[mlv_demo].[silver_orders]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[mlv_demo].[gold_customer_summary]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[mlv_demo].[bronze_orders]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[mlv_demo].[bronze_customers]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[mlv_learn].[valid_orders]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[mlv_learn].[customers]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[mlv_learn].[silver_sales]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[mlv_learn].[orders]"}},"objectType":"Table"}]
+

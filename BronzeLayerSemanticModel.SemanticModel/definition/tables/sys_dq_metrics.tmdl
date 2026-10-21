@@ -1,0 +1,110 @@
+table sys_dq_metrics
+	lineageTag: c20180f2-ac58-4e4e-90f9-e778485fe571
+	sourceLineageTag: [dbo].[sys_dq_metrics]
+
+	column Namespace
+		dataType: string
+		lineageTag: 8e66d8bf-3e31-4b22-be29-667c609674e2
+		sourceLineageTag: Namespace
+		summarizeBy: none
+		sourceColumn: Namespace
+
+		annotation SummarizationSetBy = Automatic
+
+	column MLVName
+		dataType: string
+		lineageTag: 1f21c7c1-dd43-4ada-b5bc-da3c6d4129b0
+		sourceLineageTag: MLVName
+		summarizeBy: none
+		sourceColumn: MLVName
+
+		annotation SummarizationSetBy = Automatic
+
+	column MLVID
+		dataType: string
+		lineageTag: 6aa60eba-10a7-4e9a-8c37-ebb89578eeff
+		sourceLineageTag: MLVID
+		summarizeBy: none
+		sourceColumn: MLVID
+
+		annotation SummarizationSetBy = Automatic
+
+	column RefreshPolicy
+		dataType: string
+		lineageTag: f9a996e7-b19c-4286-a362-ff13c6f516ae
+		sourceLineageTag: RefreshPolicy
+		summarizeBy: none
+		sourceColumn: RefreshPolicy
+
+		annotation SummarizationSetBy = Automatic
+
+	column RefreshDate
+		dataType: string
+		lineageTag: 33b3e1d3-4931-4a8f-a620-f2eaaa904af3
+		sourceLineageTag: RefreshDate
+		summarizeBy: none
+		sourceColumn: RefreshDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column RefreshTimestamp
+		dataType: string
+		lineageTag: a7ecc679-f773-4c96-a1a6-be7067c95bf5
+		sourceLineageTag: RefreshTimestamp
+		summarizeBy: none
+		sourceColumn: RefreshTimestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column Message
+		dataType: string
+		lineageTag: 0e94c37d-aa49-432f-a5e9-a955c0ce1e41
+		sourceLineageTag: Message
+		summarizeBy: none
+		sourceColumn: Message
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalRowsProcessed
+		dataType: string
+		lineageTag: 3d4c3024-54db-44b1-b18b-0214617acf25
+		sourceLineageTag: TotalRowsProcessed
+		summarizeBy: none
+		sourceColumn: TotalRowsProcessed
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalRowsDropped
+		dataType: string
+		lineageTag: 47fd1991-1cbd-44f0-9c68-5e1dce52d29e
+		sourceLineageTag: TotalRowsDropped
+		summarizeBy: none
+		sourceColumn: TotalRowsDropped
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalViolations
+		dataType: string
+		lineageTag: 15763fe8-866c-4b44-8f85-1533fe56b324
+		sourceLineageTag: TotalViolations
+		summarizeBy: none
+		sourceColumn: TotalViolations
+
+		annotation SummarizationSetBy = Automatic
+
+	column ViolationsPerConstraint
+		dataType: string
+		lineageTag: 0a720633-8239-41df-98af-dd9c0276a828
+		sourceLineageTag: ViolationsPerConstraint
+		summarizeBy: none
+		sourceColumn: ViolationsPerConstraint
+
+		annotation SummarizationSetBy = Automatic
+
+	partition sys_dq_metrics = entity
+		mode: directLake
+		source
+			entityName: sys_dq_metrics
+			schemaName: dbo
+			expressionSource: 'DirectLake - LH_BRONZE_LAYER'
+
