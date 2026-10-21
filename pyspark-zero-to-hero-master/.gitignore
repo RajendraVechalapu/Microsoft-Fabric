@@ -1,9 +1,0 @@
-.ipynb_checkpoints/
-_*
-spark-warehouse/*
-metastore_db/*
-derby.log
-data/
-data
-/data
-/mnt
