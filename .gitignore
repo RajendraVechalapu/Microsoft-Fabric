@@ -1,1 +1,4 @@
 rajenv/*
+
+# LFS pointer stubs only (real data not downloaded)
+pyspark-zero-to-hero-master/datasets/
