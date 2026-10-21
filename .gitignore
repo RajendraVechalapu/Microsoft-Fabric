@@ -2,3 +2,4 @@ rajenv/*
 
 # LFS pointer stubs only (real data not downloaded)
 DeltaTable Exercises/pyspark-zero-to-hero-master/datasets/
+__pycache__/
