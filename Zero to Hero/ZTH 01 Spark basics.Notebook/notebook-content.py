@@ -13,8 +13,7 @@
 # # PySpark zero to hero: 01 Spark basics
 # **What you learn:** create a DataFrame, inspect its schema, filter, add columns and aggregate.
 # **Why:** every later lesson builds on these DataFrame operations.
-#
-# This notebook uses in-memory sample data only, so no Lakehouse needs to be attached.
+# # This notebook uses in-memory sample data only, so no Lakehouse needs to be attached.
 # Run the cells in order.
 
 # CELL ********************

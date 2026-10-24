@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "00_delete_all_notebooks_in_folder"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "cea2e0c8-9477-b23e-416f-697368352a9d"
+  }
+}
