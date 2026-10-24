@@ -13,8 +13,7 @@
 # # SCD2 04 - Gold: apply one batch to `dim_customer` (SCD Type 2)
 # This is the heart of the solution. It uses **one atomic Delta `MERGE`** (the "merge-key / NULL-key" staging pattern),
 # so a failure can never leave a customer with its old row closed but no new row inserted.
-#
-# ### Classifying each incoming row against the current dimension row
+# # ### Classifying each incoming row against the current dimension row
 # | Action | Rule (evaluated in this order) | Effect |
 # |---|---|---|
 # | `IGNORE_DELETE` | delete for a key with no current row | nothing |
@@ -24,16 +23,13 @@
 # | `DELETE` | `op = 'D'` | close current row, `is_deleted = true` |
 # | `SCD2_CHANGE` | Type 2 hash differs | close current row **and** insert a new current version |
 # | `SCD1_UPDATE` | only Type 1 hash differs | overwrite Type 1 columns on the current row |
-#
-# ### The single-MERGE trick
+# # ### The single-MERGE trick
 # A changed customer needs two actions on the target (UPDATE old row + INSERT new row), but MERGE does one action per source row.
 # So the staged source contains the changed customer **twice**:
 # - once with `merge_key = customer_id` -> matches the current row -> **UPDATE** (close it)
 # - once with `merge_key = NULL` -> can never match -> **INSERT** (new version)
-#
-# Effective dating is **half-open** `[effective_from, effective_to)`: the closed row's `effective_to` equals the new row's `effective_from`.
-#
-# **Concurrency:** surrogate keys are `max(customer_sk) + row_number()`. Run one writer per dimension at a time (the orchestrator does).
+# # Effective dating is **half-open** `[effective_from, effective_to)`: the closed row's `effective_to` equals the new row's `effective_from`.
+# # **Concurrency:** surrogate keys are `max(customer_sk) + row_number()`. Run one writer per dimension at a time (the orchestrator does).
 
 # PARAMETERS CELL ********************
 
@@ -49,7 +45,7 @@ batch_id = ""
 
 # CELL ********************
 
-# MAGIC %run nb_scd2_00_common
+%run nb_scd2_00_common%run nb_scd2_00_common
 
 # METADATA ********************
 

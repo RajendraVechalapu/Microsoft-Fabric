@@ -13,8 +13,7 @@
 # # SCD2 05 - Quality checks and reconciliation for `dim_customer`
 # Run after every batch (the orchestrator does). Any failed check fails the notebook, which stops the pipeline
 # **before** a later batch is applied on top of bad history.
-#
-# | Check | Why it matters |
+# # | Check | Why it matters |
 # |---|---|
 # | one current row per customer | the defining SCD2 invariant; fact lookups would duplicate otherwise |
 # | unique surrogate keys | facts join on `customer_sk` |
@@ -38,7 +37,7 @@ fail_on_error = True
 
 # CELL ********************
 
-# MAGIC %run nb_scd2_00_common
+%run nb_scd2_00_common%run nb_scd2_00_common
 
 # METADATA ********************
 

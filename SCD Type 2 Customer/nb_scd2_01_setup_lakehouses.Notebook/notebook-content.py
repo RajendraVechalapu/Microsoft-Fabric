@@ -12,18 +12,15 @@
 
 # # SCD2 01 - Set up bronze, silver and gold lakehouses
 # Run this notebook **once** (it is safe to rerun - every step is idempotent).
-#
-# What it does:
+# # What it does:
 # 1. Creates three lakehouses in the current workspace if they do not exist:
 #    `LH_SCD2_BRONZE`, `LH_SCD2_SILVER`, `LH_SCD2_GOLD`
 # 2. Creates the folder layout in bronze: `samples`, `landing`, `archive`, `rejected`
 # 3. Writes three daily sample CSV extracts for the customer source system
 # 4. Lands the sample files in `Files/landing/customer` (all three, or only day 1)
 # 5. Creates every Delta table with an explicit schema and seeds the dimension's **unknown member** (`customer_sk = -1`)
-#
-# No default lakehouse needs to be attached to this notebook.
-#
-# | Layer | Lakehouse | Tables |
+# # No default lakehouse needs to be attached to this notebook.
+# # | Layer | Lakehouse | Tables |
 # |---|---|---|
 # | Bronze | LH_SCD2_BRONZE | `customer_raw`, `file_manifest` |
 # | Silver | LH_SCD2_SILVER | `customer_clean`, `customer_quarantine` |
@@ -45,7 +42,7 @@ LAND_SAMPLE_FILES = "all"
 
 # CELL ********************
 
-# MAGIC %run nb_scd2_00_common
+%run nb_scd2_00_common%run nb_scd2_00_common
 
 # METADATA ********************
 
@@ -131,8 +128,7 @@ for key in ["samples_dir", "landing_dir", "archive_dir", "rejected_dir"]:
 # ## 3. Sample source extracts (3 days)
 # Each file is a **delta extract**: only customers that changed that day, with `op` = I(nsert) / U(pdate) / D(elete)
 # and the source change time `updated_at`.
-#
-# | Day | Scenario it exercises |
+# # | Day | Scenario it exercises |
 # |---|---|
 # | 1 | Initial load of 5 customers |
 # | 2 | C001 unchanged (no-op) - C002 moves city (**SCD2**) - C003 phone changes and messy name casing (**SCD1** only) - C004 appears **twice** (de-dup keeps latest, **SCD2**) - C006 **new** - 1 row without id and 1 bad email (**quarantine**) |
@@ -204,8 +200,7 @@ for name in to_land:
 # ## 4. Create all Delta tables with explicit schemas
 # Explicit schemas (instead of letting the first write infer them) are a production must:
 # types never drift with the data, and every downstream notebook can rely on the contract.
-#
-# The dimension also gets an **unknown member** row (`customer_sk = -1`). Fact loads map
+# # The dimension also gets an **unknown member** row (`customer_sk = -1`). Fact loads map
 # missing/late customers to it instead of dropping the fact row.
 
 # CELL ********************

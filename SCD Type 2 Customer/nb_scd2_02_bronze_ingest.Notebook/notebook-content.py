@@ -13,15 +13,13 @@
 # # SCD2 02 - Bronze: ingest one customer CSV file
 # **One file = one batch.** SCD2 history is order-sensitive, so files are processed strictly oldest-first,
 # one at a time. `batch_id` is derived from the file name (e.g. `customer_20260102`), which makes reruns deterministic.
-#
-# Production controls in this notebook:
+# # Production controls in this notebook:
 # - **File contract check**: header must match the expected columns exactly, otherwise the file moves to `rejected/`
 # - **Raw fidelity**: every column lands as STRING, plus lineage columns (`_source_file`, `_source_row`, `_batch_id`, `_ingested_at`)
 # - **Malformed rows are kept**, captured in `_corrupt_record` and quarantined later in silver
 # - **Idempotency**: `replaceWhere _batch_id = ...` overwrites only this batch; `file_manifest` prevents double loads
 # - **Archive** after success so landing only ever contains unprocessed files
-#
-# Returns (via `notebookutils.notebook.exit`) JSON: `{"status": "LOADED"|"NO_FILES", "batch_id": ..., ...}`
+# # Returns (via `notebookutils.notebook.exit`) JSON: `{"status": "LOADED"|"NO_FILES", "batch_id": ..., ...}`
 
 # PARAMETERS CELL ********************
 
@@ -37,7 +35,7 @@ source_file = ""
 
 # CELL ********************
 
-# MAGIC %run nb_scd2_00_common
+%run nb_scd2_00_common%run nb_scd2_00_common
 
 # METADATA ********************
 

@@ -12,8 +12,7 @@
 
 # # SCD2 03 - Silver: validate, standardise, de-duplicate, hash
 # Input: one bronze batch. Output: exactly **one clean row per `customer_id`** for that batch, ready for the SCD2 merge.
-#
-# 1. **Validate** with explicit data-quality rules -> failing rows go to `customer_quarantine` with the reasons (never silently dropped)
+# # 1. **Validate** with explicit data-quality rules -> failing rows go to `customer_quarantine` with the reasons (never silently dropped)
 # 2. **Standardise** (trim, casing, phone digits) so cosmetic differences do not create fake SCD2 versions
 # 3. **De-duplicate** to the latest change per key - Delta `MERGE` fails if two source rows match one target row
 # 4. **Hash** the Type 2 and Type 1 attribute groups separately (`scd2_hash`, `scd1_hash`) for cheap change detection
@@ -33,7 +32,7 @@ batch_id = ""
 
 # CELL ********************
 
-# MAGIC %run nb_scd2_00_common
+%run nb_scd2_00_common%run nb_scd2_00_common
 
 # METADATA ********************
 

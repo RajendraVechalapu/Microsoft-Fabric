@@ -17,8 +17,7 @@
 # - table schemas (DDL) for every table in the solution
 # - SCD column lists (which attributes are Type 2 history vs Type 1 overwrite)
 # - shared helpers: path resolution, idempotent table creation, run logging, Delta metrics
-#
-# All reads and writes use **ABFSS OneLake paths**, so no notebook needs a default lakehouse attached
+# # All reads and writes use **ABFSS OneLake paths**, so no notebook needs a default lakehouse attached
 # and the same code works for schema-enabled and non-schema lakehouses.
 
 # CELL ********************

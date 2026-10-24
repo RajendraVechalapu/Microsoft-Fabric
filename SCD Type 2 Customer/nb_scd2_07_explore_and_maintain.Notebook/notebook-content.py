@@ -12,8 +12,7 @@
 
 # # SCD2 07 - Explore history, consume the dimension, maintain the tables
 # Run after the orchestrator. Every cell is read-only except **Maintenance** and the opt-in **Reset**.
-#
-# 1. Current view, full history of one customer
+# # 1. Current view, full history of one customer
 # 2. Point-in-time ("as was") lookup and a fact join on `[effective_from, effective_to)`
 # 3. Delta time travel vs SCD2 history - they answer different questions
 # 4. Change Data Feed: what changed in the dimension in the last batch
@@ -36,7 +35,7 @@ RESET_CONFIRM = ""                 # type RESET to wipe all lab tables and files
 
 # CELL ********************
 
-# MAGIC %run nb_scd2_00_common
+%run nb_scd2_00_common%run nb_scd2_00_common
 
 # METADATA ********************
 

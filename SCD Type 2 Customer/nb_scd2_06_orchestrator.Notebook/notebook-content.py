@@ -12,15 +12,12 @@
 
 # # SCD2 06 - Orchestrator (run this to process everything end to end)
 # Processes batches **strictly in order**: bronze -> silver -> gold merge -> quality checks, one batch at a time.
-#
-# **Restartable by design.** Before picking up new files it first finishes any batch that is already in bronze but has
+# # **Restartable by design.** Before picking up new files it first finishes any batch that is already in bronze but has
 # not completed the gold merge (e.g. the previous run failed in silver). A failed batch stops the run, so a newer batch is
 # never applied on top of a broken one - fix the cause and simply rerun this notebook.
-#
-# **Scheduling:** schedule this notebook directly, or call it from a Fabric Data Pipeline *Notebook* activity.
+# # **Scheduling:** schedule this notebook directly, or call it from a Fabric Data Pipeline *Notebook* activity.
 # Set the pipeline/schedule so only **one run at a time** is active (single writer per dimension).
-#
-# Child notebooks are run with `notebookutils.notebook.run`, so each one gets its own run snapshot in the monitoring hub.
+# # Child notebooks are run with `notebookutils.notebook.run`, so each one gets its own run snapshot in the monitoring hub.
 
 # PARAMETERS CELL ********************
 
@@ -36,7 +33,7 @@ child_timeout_sec = 1800
 
 # CELL ********************
 
-# MAGIC %run nb_scd2_00_common
+%run nb_scd2_00_common%run nb_scd2_00_common
 
 # METADATA ********************
 
