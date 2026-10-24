@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "ZTH 01 Spark basics",
+    "description": "PySpark zero to hero: 01 Spark basics"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "0fb48385-ca4f-48fd-84f1-f49e9d08cbda"
+  }
+}
