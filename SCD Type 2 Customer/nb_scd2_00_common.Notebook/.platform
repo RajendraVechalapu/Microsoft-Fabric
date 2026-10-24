@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "nb_scd2_00_common",
+    "description": "SCD Type 2 lab: Shared config, schemas and helpers (loaded with %run)"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "667c04da-7f22-4fff-a5d2-abf0cbcdc751"
+  }
+}

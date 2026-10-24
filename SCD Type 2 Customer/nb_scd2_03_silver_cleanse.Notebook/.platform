@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "nb_scd2_03_silver_cleanse",
+    "description": "SCD Type 2 lab: Validates, quarantines, standardises, de-duplicates and hashes a batch"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "c6722650-b4c0-4033-8038-917d2ad55321"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "nb_scd2_04_gold_scd2_merge",
+    "description": "SCD Type 2 lab: Applies a batch to dim_customer with a single atomic SCD Type 2 MERGE"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "572182a5-849d-4670-9a3b-f8433258c51f"
+  }
+}

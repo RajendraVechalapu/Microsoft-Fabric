@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "nb_scd2_06_orchestrator",
+    "description": "SCD Type 2 lab: Runs all batches in order end to end; restartable"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "55ef9628-327a-4aa5-9d97-25cffc031b8d"
+  }
+}

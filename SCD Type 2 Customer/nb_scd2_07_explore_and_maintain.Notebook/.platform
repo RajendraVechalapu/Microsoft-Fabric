@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "nb_scd2_07_explore_and_maintain",
+    "description": "SCD Type 2 lab: Point-in-time queries, time travel, CDF, maintenance and reset"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "4e8b70a1-cb19-48d6-b630-a3a23d2ce8cc"
+  }
+}
